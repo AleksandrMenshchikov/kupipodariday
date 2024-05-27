@@ -2,7 +2,7 @@
 dist
 build
 node_modules
-packages/backend/.env
+.env
 
 # Logs
 logs

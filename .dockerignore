@@ -1,9 +1,0 @@
-node_modules
-dist
-build
-packages/backend/dev.Dockerfile
-docker-compose.yml
-.env*
-.idea
-.vscode
-.DS_Store

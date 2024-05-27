@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+  nginx:
+    build:
+      context: ./frontend
+      dockerfile: prod.Dockerfile
+    image: nginx-prod
+    container_name: nginx-prod
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:80"
+      - "443:443"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: prod.Dockerfile
+    image: backend-prod
+    container_name: backend-prod
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    ports:
+      - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    healthcheck:
+      test: "wget -nv -t1 --spider 'http://localhost:4000/'"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    container_name: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "kpd-db" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  db-data:
+  build-data:
+
+
