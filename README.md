@@ -1,5 +1,9 @@
 # kupipodariday
 
+- IP 51.250.95.133
+- Frontend https://kpd.nomorepartiesco.ru
+- Backend https://api.kpd.nomorepartiesco.ru
+
 Установка зависимостей
 ```bash
 npm ci
