@@ -1,4 +1,6 @@
-export const URL_DEV = "http://localhost:4000";
+export const URL_DEV = process.env.NODE_ENV === "development"
+  ? "http://localhost:4000"
+  : "https://api.kpd.nomorepartiesco.ru";
 
 export const MINIMUM_PASSWORD_LENGTH = 3;
 export const MINIMUM_USERNAME_LENGTH = 3;
@@ -23,6 +25,6 @@ export const makeRightDeclension = (count, txt, cases = [2, 0, 1, 1, 1, 2]) =>
     count % 100 > 4 && count % 100 < 20
       ? 2
       : cases[count % 10 < 5 ? count % 10 : 5]
-  ];
+    ];
 
 export const priceArr = [100, 300, 500, 1000, 3000];

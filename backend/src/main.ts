@@ -4,7 +4,11 @@ import helmet from 'helmet';
 import { ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from './shared/global-exception.filter';
 
-const whitelist: string[] = ['http://localhost:3000'];
+const whitelist: string[] = [
+  'http://localhost:3000',
+  'http://kpd.nomorepartiesco.ru',
+  'https://kpd.nomorepartiesco.ru',
+];
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
